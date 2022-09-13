@@ -1,0 +1,171 @@
+@import "./reset";
+
+// Global
+.container {
+  max-width: 1240px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 25px 30px;
+}
+
+.active {
+  display: block !important;
+}
+
+@keyframes trigger {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.02);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.trigger {
+  border: 1px solid red !important;
+  animation: trigger 0.15s;
+}
+
+//
+table {
+  width: 100%;
+  border-spacing: 0 10px;
+  thead {
+    th {
+      color: white;
+      fill: white;
+      background-color: rgb(150, 150, 150);
+      &:first-child {
+        width: 55px;
+        border-radius: 5px 0 0 5px;
+      }
+      &:last-child {
+        width: 105px;
+        border-radius: 0 5px 5px 0;
+      }
+    }
+  }
+  tbody {
+    tr {
+      background-color: rgb(230, 238, 243);
+    }
+    td {
+      color: rgb(150, 150, 150);
+      &:nth-child(2) {
+        color: inherit;
+      }
+      &:last-child {
+        fill: rgb(150, 150, 150);
+        div {
+          cursor: pointer;
+          svg {
+            width: 25px;
+            transition: 0.2s all;
+          }
+          :hover {
+            fill: rgba(150, 150, 150, 0.5);
+          }
+        }
+      }
+    }
+  }
+  th,
+  td {
+    text-align: start;
+    &:first-child {
+      padding-right: 0;
+    }
+    .tools {
+      display: flex;
+      justify-content: end;
+      gap: 15px;
+      div {
+        width: 25px;
+        svg {
+          width: 25px;
+          transition: 0.2s all;
+        }
+      }
+    }
+  }
+
+  td,
+  th {
+    padding: 10px;
+  }
+}
+
+.img__title {
+  position: relative;
+  margin: 0 auto;
+  width: 45px;
+  height: 45px;
+  background-color: rgb(150, 150, 150);
+  border-radius: 100px;
+  img {
+    user-select: none;
+    padding: 2px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
+.add__note {
+  width: 100%;
+}
+.create__note {
+  margin-top: 10px;
+  &-btn {
+    display: none;
+  }
+  &-btn,
+  .add__note {
+    margin-left: auto;
+    color: white;
+    background-color: rgb(150, 150, 150);
+    border-radius: 5px;
+    padding: 6px 12px;
+    transition: 0.2s all;
+    &:hover {
+      background-color: rgba(150, 150, 150, 0.7);
+    }
+  }
+}
+input,
+select {
+  width: 100%;
+  padding: 5px 5px 5px 8px;
+  border: 1px solid white;
+}
+.create__note-form {
+  display: none;
+  &-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 10px;
+    gap: 10px;
+    background-color: rgb(230, 238, 243);
+    .create__note-add {
+      width: 50%;
+    }
+    .close {
+      position: absolute;
+      top: 0;
+      right: 0;
+      transform: translate(50%, -50%);
+      background-color: white;
+      border-radius: 100%;
+      cursor: pointer;
+      transition: 0.2s all;
+      &:hover {
+        opacity: 0.7;
+      }
+    }
+  }
+}
