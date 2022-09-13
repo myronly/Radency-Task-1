@@ -116,8 +116,8 @@ h6 {
 
 .trigger {
   border: 1px solid red !important;
-  -webkit-animation: trigger 0.15s;
-          animation: trigger 0.15s;
+  -webkit-animation: trigger 0.1s;
+          animation: trigger 0.1s;
 }
 
 table {
@@ -209,6 +209,7 @@ table td .tools div svg {
 table td,
 table th {
   padding: 10px;
+  white-space: nowrap;
 }
 
 .img__title {
@@ -268,6 +269,11 @@ select {
   width: 100%;
   padding: 5px 5px 5px 8px;
   border: 1px solid white;
+}
+
+#save,
+#edit {
+  display: none;
 }
 
 .create__note-form {

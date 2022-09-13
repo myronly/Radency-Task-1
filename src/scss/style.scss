@@ -26,7 +26,7 @@
 
 .trigger {
   border: 1px solid red !important;
-  animation: trigger 0.15s;
+  animation: trigger 0.1s;
 }
 
 //
@@ -95,6 +95,7 @@ table {
   td,
   th {
     padding: 10px;
+    white-space: nowrap;
   }
 }
 
@@ -140,6 +141,10 @@ select {
   width: 100%;
   padding: 5px 5px 5px 8px;
   border: 1px solid white;
+}
+#save,
+#edit {
+  display: none;
 }
 .create__note-form {
   display: none;
