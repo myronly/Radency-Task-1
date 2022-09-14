@@ -125,6 +125,13 @@ table {
   border-spacing: 0 10px;
 }
 
+table caption {
+  font-size: 24px;
+  font-weight: 400;
+  color: #969696;
+  text-align: start;
+}
+
 table thead th {
   color: white;
   fill: white;
@@ -137,8 +144,11 @@ table thead th:first-child {
 }
 
 table thead th:last-child {
-  width: 105px;
   border-radius: 0 5px 5px 0;
+}
+
+table.primary__notes th:last-child {
+  width: 105px;
 }
 
 table tbody tr {
@@ -240,7 +250,14 @@ table th {
 }
 
 .create__note {
-  margin-top: 10px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  height: 65px;
+  margin-bottom: 50px;
 }
 
 .create__note-btn {
@@ -278,6 +295,7 @@ select {
 
 .create__note-form {
   display: none;
+  width: 100%;
 }
 
 .create__note-form-wrapper {

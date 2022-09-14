@@ -5,6 +5,7 @@ const notes = [
     category: "Task",
     content: "The some content",
     dates: "",
+    archived: false,
   },
   {
     name: "The theory of evolution",
@@ -12,6 +13,7 @@ const notes = [
     category: "Random Thought",
     content: "The some content",
     dates: "",
+    archived: true,
   },
   {
     name: "New Feature",
@@ -19,6 +21,7 @@ const notes = [
     category: "Idea",
     content: "The some content",
     dates: "2021-05-03, 2021-05-05",
+    archived: false,
   },
   {
     name: "William Gaddis",
@@ -26,6 +29,7 @@ const notes = [
     category: "Quote",
     content: "The some content",
     dates: "",
+    archived: false,
   },
   {
     name: "Books",
@@ -33,6 +37,39 @@ const notes = [
     category: "Task",
     content: "The some content",
     dates: "",
+    archived: false,
+  },
+  {
+    name: "William Gaddis",
+    created: "May 07, 2021",
+    category: "Quote",
+    content: "The some content",
+    dates: "",
+    archived: true,
+  },
+  {
+    name: "The theory of evolution",
+    created: "April 27, 2021",
+    category: "Random Thought",
+    content: "The some content",
+    dates: "",
+    archived: true,
+  },
+  {
+    name: "Shopping list",
+    created: "April 20, 2021",
+    category: "Task",
+    content: "The some content",
+    dates: "",
+    archived: false,
+  },
+  {
+    name: "Books",
+    created: "May 15, 2021",
+    category: "Task",
+    content: "The some content",
+    dates: "",
+    archived: true,
   },
 ];
 
