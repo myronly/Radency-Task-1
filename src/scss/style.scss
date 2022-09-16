@@ -12,6 +12,15 @@
   display: block !important;
 }
 
+.more {
+  cursor: help;
+}
+
+.trigger {
+  border: 1px solid red !important;
+  animation: trigger 0.1s;
+}
+
 @keyframes trigger {
   0% {
     transform: scale(1);
@@ -22,11 +31,6 @@
   100% {
     transform: scale(1);
   }
-}
-
-.trigger {
-  border: 1px solid red !important;
-  animation: trigger 0.1s;
 }
 
 //
@@ -44,6 +48,7 @@ table {
       color: white;
       fill: white;
       background-color: rgb(150, 150, 150);
+
       &:first-child {
         width: 55px;
         border-radius: 5px 0 0 5px;
@@ -51,12 +56,26 @@ table {
       &:last-child {
         border-radius: 0 5px 5px 0;
       }
+      &:nth-child(2) {
+        width: 220px;
+      }
+      &:nth-child(3) {
+        width: 140px;
+      }
+      &:nth-child(4) {
+        width: 170px;
+      }
+      &:nth-child(5) {
+        width: 210px;
+      }
+      &:nth-child(6) {
+        width: 240px;
+      }
     }
   }
-  &.primary__notes {
-    th:last-child {
-      width: 105px;
-    }
+  &.active__notes th:last-child,
+  &.archive__notes th:last-child {
+    width: 105px;
   }
   tbody {
     tr {
@@ -108,7 +127,9 @@ table {
     white-space: nowrap;
   }
 }
-
+.status__notes {
+  margin-bottom: 70px;
+}
 .img__title {
   position: relative;
   margin: 0 auto;
@@ -156,7 +177,9 @@ select {
   border: 1px solid white;
 }
 #save,
-#edit {
+#edit,
+#archive,
+#unarchive {
   display: none;
 }
 .create__note-form {
