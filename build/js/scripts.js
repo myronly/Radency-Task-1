@@ -1,7 +1,7 @@
 "use strict";
-// Imports
-import notes from "./store.js";
+import notes from "./store.min.js";
 
+// Render 
 // Render Notes
 const noteActive = document.querySelector(".active__notes tbody");
 const noteArchive = document.querySelector(".archive__notes tbody");
@@ -22,7 +22,7 @@ const renderNotes = () => {
 
     // Const
     const getNoteId = document.querySelectorAll("[data-note]");
-    const setMaxLenght = document.querySelectorAll("td span");
+    const setMaxLength = document.querySelectorAll("td span");
 
     // Tools Note
     deleteNoteRender(getNoteId);
@@ -32,8 +32,8 @@ const renderNotes = () => {
     // Status Notes
     statusNotes(getNoteId);
 
-    // Max Lenght
-    maxLenghtFunc(setMaxLenght);
+    // Max Length
+    maxLengthFunc(setMaxLength);
   } catch (error) {
     console.log(error);
   }
@@ -54,9 +54,9 @@ function statusNotes(getNoteId) {
     const noteCategory = notes[id].category;
     const noteStatus = notes[id].archived;
     getNoteStatus.forEach((getStatus) => {
-      const getCategoty = getStatus.dataset.category;
+      const getCategory = getStatus.dataset.category;
       const setStatus = getStatus.querySelector(`${!noteStatus ? ".statusActive" : ".statusArchived"}`);
-      if (noteCategory === getCategoty) {
+      if (noteCategory === getCategory) {
         setStatus.textContent = +setStatus.textContent + 1;
         return;
       }
@@ -64,55 +64,8 @@ function statusNotes(getNoteId) {
   });
 }
 
-// Max Lenght
-function maxLenghtFunc(maxLenght) {
-  // Data - Set Max Lenght
-  maxLenght.forEach((max) => {
-    if (max.parentNode.classList.value === "noteDates") {
-      const lastData = max.textContent.split(",");
-      if (lastData.length > 2) {
-        max.textContent =
-          "..., " +
-          lastData
-            .slice(lastData.length - 2)
-            .join()
-            .trim();
-        max.parentNode.classList.add("more");
-      }
-      return;
-    }
-    // Other - Set Max Lenght
-    if (max.offsetWidth >= 170) {
-      const lastLength = max.textContent.split("");
-      const length = lastLength.length;
-      max.textContent = null;
-      for (let i = 0; i < length; i++) {
-        max.textContent += lastLength.shift();
-        if (max.offsetWidth >= 160) {
-          i = length;
-          max.textContent += "...";
-          max.parentNode.classList.add("more");
-        }
-      }
-    }
-  });
-}
 
-// Browsing Error
-const browsingError = (newNoteItems) => {
-  for (let newNoteItem of newNoteItems) {
-    newNoteItem.classList.remove("trigger");
-    newNoteItem.addEventListener("change", () => {
-      newNoteItem.classList.remove("trigger");
-    });
-    if (newNoteItem.value.replace(/\s/g, "") === "") {
-      setTimeout(() => newNoteItem.classList.add("trigger"), 4);
-      return true;
-    }
-  }
-};
-
-// Create Note
+// Tools Note
 const createNote = document.querySelector(".add__note");
 const createNoteForm = document.querySelector(".create__note-form");
 const createNoteFormOpen = document.querySelector(".create__note-btn");
@@ -145,20 +98,10 @@ createNote.addEventListener("click", (e) => {
   }
 });
 
-// Open/Close - Form
-const toggleActive = () => {
-  createNoteFormOpen.classList.toggle("active");
-  createNoteForm.classList.toggle("active");
-};
-const toggleCreateForm = (toggleCreateNote) => {
-  toggleCreateNote.forEach((toggleNote) => toggleNote.addEventListener("click", () => toggleActive()));
-};
-toggleCreateForm([createNoteFormOpen, createNoteFormClose]);
-
 // Edit Note
 function editNoteRender(getNoteId) {
-  const toggleEditSaveNote = (toglleEdit) => {
-    toglleEdit.forEach((item) => item.classList.toggle("active"));
+  const toggleEditSaveNote = (toggleEdit) => {
+    toggleEdit.forEach((item) => item.classList.toggle("active"));
   };
 
   getNoteId.forEach((noteId) => {
@@ -203,7 +146,6 @@ function editNoteRender(getNoteId) {
   });
 }
 
-// Archive Note
 function archiveNoteRender(getNoteId) {
   const toggleArchive = (toggle, id) => {
     toggle.forEach((note) => {
@@ -232,3 +174,63 @@ function deleteNoteRender(getNoteId) {
     });
   });
 }
+
+
+
+// Assets Note
+const browsingError = (newNoteItems) => {
+  for (let newNoteItem of newNoteItems) {
+    newNoteItem.classList.remove("trigger");
+    newNoteItem.addEventListener("change", () => {
+      newNoteItem.classList.remove("trigger");
+    });
+    if (newNoteItem.value.replace(/\s/g, "") === "") {
+      setTimeout(() => newNoteItem.classList.add("trigger"), 4);
+      return true;
+    }
+  }
+};
+
+// Max Length
+function maxLengthFunc(maxLength) {
+  // Data - Set Max Length
+  maxLength.forEach((max) => {
+    if (max.parentNode.classList.value === "noteDates") {
+      const lastData = max.textContent.split(",");
+      if (lastData.length > 2) {
+        max.textContent =
+          "..., " +
+          lastData
+            .slice(lastData.length - 2)
+            .join()
+            .trim();
+        max.parentNode.classList.add("more");
+      }
+      return;
+    }
+    // Other - Set Max Length
+    if (max.offsetWidth >= 170) {
+      const lastLength = max.textContent.split("");
+      const length = lastLength.length;
+      max.textContent = null;
+      for (let i = 0; i < length; i++) {
+        max.textContent += lastLength.shift();
+        if (max.offsetWidth >= 160) {
+          i = length;
+          max.textContent += "...";
+          max.parentNode.classList.add("more");
+        }
+      }
+    }
+  });
+}
+
+const toggleActive = () => {
+  createNoteFormOpen.classList.toggle("active");
+  createNoteForm.classList.toggle("active");
+};
+const toggleCreateForm = (toggleCreateNote) => {
+  toggleCreateNote.forEach((toggleNote) => toggleNote.addEventListener("click", () => toggleActive()));
+};
+toggleCreateForm([createNoteFormOpen, createNoteFormClose]);
+

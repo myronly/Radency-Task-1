@@ -7,21 +7,18 @@ let path = {
     css: project_folder + "/css/",
     js: project_folder + "/js/",
     img: project_folder + "/img/",
-    fonts: project_folder + "/fonts/",
   },
   src: {
-    html: source_folder + "/*.html",
+    html: [source_folder + "/*.html", "!" + source_folder + "/_*.html"],
     css: source_folder + "/scss/style.scss",
     js: source_folder + "/js/*.js",
     img: source_folder + "/img/**/*.+(png|jpg|jpeg|ico|svg|webp)",
-    fonts: source_folder + "/fonts/*",
   },
   watch: {
     html: source_folder + "/**/*.html",
     css: source_folder + ["/scss/**/*.scss"],
     js: source_folder + "/js/**/*.js",
     img: source_folder + "/img/**/*.+(png|jpg|jpeg|ico|svg|webp)",
-    fonts: source_folder + "/fonts/*",
   },
 };
 
@@ -34,6 +31,7 @@ let { src, dest } = require("gulp"),
   group_media = require("gulp-group-css-media-queries"),
   clean_css = require("gulp-clean-css"),
   rename = require("gulp-rename"),
+  uglify = require("gulp-uglify-es").default,
   imagemin = require("gulp-imagemin");
 
 // Browser Sync
@@ -79,10 +77,12 @@ function img() {
 // JavaScript
 function js() {
   return src(path.src.js)
+    .pipe(fileinclude())
     .pipe(dest(path.build.js))
+    .pipe(uglify())
     .pipe(
       rename({
-        extname: ".js",
+        extname: ".min.js",
       })
     )
     .pipe(dest(path.build.js))
