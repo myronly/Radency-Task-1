@@ -13,8 +13,12 @@ const getNote = ({ name, created, category, content, dates, archived }, id) =>
 const renderNotes = () => {
   noteActive.innerHTML = null;
   noteArchive.innerHTML = null;
+
   try {
-    for (let i = 0; i < notes.length; i++) !notes[i].archived ? (noteActive.innerHTML += getNote(notes[i], i)) : (noteArchive.innerHTML += getNote(notes[i], i));
+    for (let i = 0; i < notes.length; i++) {
+      datesFromContent(i);
+      !notes[i].archived ? (noteActive.innerHTML += getNote(notes[i], i)) : (noteArchive.innerHTML += getNote(notes[i], i));
+    }
 
     // Const
     const getNoteId = document.querySelectorAll("[data-note]");
@@ -30,6 +34,8 @@ const renderNotes = () => {
 
     // Max Length
     maxLengthFunc(setMaxLength);
+
+    // Set Date
   } catch (error) {
     console.log(error);
   }

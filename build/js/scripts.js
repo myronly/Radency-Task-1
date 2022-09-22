@@ -17,8 +17,12 @@ const getNote = ({ name, created, category, content, dates, archived }, id) =>
 const renderNotes = () => {
   noteActive.innerHTML = null;
   noteArchive.innerHTML = null;
+
   try {
-    for (let i = 0; i < notes.length; i++) !notes[i].archived ? (noteActive.innerHTML += getNote(notes[i], i)) : (noteArchive.innerHTML += getNote(notes[i], i));
+    for (let i = 0; i < notes.length; i++) {
+      datesFromContent(i);
+      !notes[i].archived ? (noteActive.innerHTML += getNote(notes[i], i)) : (noteArchive.innerHTML += getNote(notes[i], i));
+    }
 
     // Const
     const getNoteId = document.querySelectorAll("[data-note]");
@@ -34,12 +38,14 @@ const renderNotes = () => {
 
     // Max Length
     maxLengthFunc(setMaxLength);
+
+    // Set Date
   } catch (error) {
     console.log(error);
   }
 };
 renderNotes();
-
+ // Notes
 // Status Notes
 function statusNotes(getNoteId) {
   // Get Category
@@ -63,7 +69,7 @@ function statusNotes(getNoteId) {
     });
   });
 }
-
+ // Status
 
 // Tools Note
 const createNote = document.querySelector(".add__note");
@@ -97,7 +103,7 @@ createNote.addEventListener("click", (e) => {
     console.log(error);
   }
 });
-
+ // Create
 // Edit Note
 function editNoteRender(getNoteId) {
   const toggleEditSaveNote = (toggleEdit) => {
@@ -113,16 +119,12 @@ function editNoteRender(getNoteId) {
     const editName = noteId.querySelector(".noteName");
     const editCategory = noteId.querySelector(".noteCategory");
     const editContent = noteId.querySelector(".noteContent");
-    const editDates = noteId.querySelector(".noteDates");
-
-    const lastData = notes[id].dates.split(",").pop().trim();
 
     editNote.addEventListener("click", () => {
       toggleEditSaveNote([editNote, editNoteSave]);
       editName.innerHTML = `<input value="${notes[id].name}" type="text" placeholder="Name" required />`;
       editCategory.innerHTML = `<select name="category" required>  <option value="" disabled >Category</option>  <option ${notes[id].category === "Task" ? "selected" : false} value="Task">Task</option>  <option ${notes[id].category === "Idea" ? "selected" : false} value="Idea">Idea</option>  <option ${notes[id].category === "Random Thought" ? "selected" : false} value="Random Thought">Random Thought</option>  <option ${notes[id].category === "Quote" ? "selected" : false} value="Quote">Quote</option></select>`;
       editContent.innerHTML = `<input value="${notes[id].content}" type="text" placeholder="Content" required />`;
-      editDates.innerHTML = `<input value="${lastData}" type="date" name="date" />`;
     });
 
     // Save Note
@@ -130,7 +132,6 @@ function editNoteRender(getNoteId) {
       const editNameValue = noteId.querySelector(`.noteName input`);
       const editCategoryValue = noteId.querySelector(`.noteCategory select`);
       const editContentValue = noteId.querySelector(`.noteContent input`);
-      const editDatesValue = noteId.querySelector(`.noteDates input`);
 
       if (browsingError([editNameValue, editCategoryValue, editContentValue])) return;
 
@@ -138,14 +139,12 @@ function editNoteRender(getNoteId) {
       notes[id].category = editCategoryValue.value;
       notes[id].content = editContentValue.value;
 
-      if (lastData !== editDatesValue.value) notes[id].dates ? (notes[id].dates += ", " + (lastData !== editDatesValue.value ? editDatesValue.value : "")) : (notes[id].dates = editDatesValue.value);
-
       toggleEditSaveNote([editNote, editNoteSave]);
       renderNotes();
     });
   });
 }
-
+ // Edit
 function archiveNoteRender(getNoteId) {
   const toggleArchive = (toggle, id) => {
     toggle.forEach((note) => {
@@ -162,7 +161,7 @@ function archiveNoteRender(getNoteId) {
     toggleArchive([archiveNote, unarchiveNote], id);
   });
 }
-
+ // Archive
 // Delete Note
 function deleteNoteRender(getNoteId) {
   getNoteId.forEach((noteId) => {
@@ -174,11 +173,25 @@ function deleteNoteRender(getNoteId) {
     });
   });
 }
-
-
+ // Delete
 
 // Assets Note
-const browsingError = (newNoteItems) => {
+function datesFromContent(id) {
+  const content = notes[id].content;
+
+  // Get Date
+  const getDateRegExp = /(\d{1,2}(\/|-|:)\d{1,2}(\/|-|:)\d{2,4})/gm;
+  const getDate = content.match(getDateRegExp);
+  if (!getDate) return;
+
+  // Valid Date
+  const validDateRegExp = /^(((0?[1-9]|[12]\d|3[01])(\/|-|:)(0?[13578]|1[02])(\/|-|:)((19|[2-9]\d)\d{2}))|((0?[1-9]|[12]\d|30)(\/|-|:)(0[13456789]|1[012])(\/|-|:)((19|[2-9]\d)\d{2}))|((0?[1-9]|1\d|2[0-8])(\/|-|:)02(\/|-|:)((19|[2-9]\d)\d{2}))|(29(\/|-|:)02(\/|-|:)((1[6-9]|[2-9]\d)(0[48]|[2468][048]|[13579][26])|((16|[2468][048]|[3579][26])00))))$/g;
+  const validDate = getDate.filter((date) => date.match(validDateRegExp) !== null);
+
+  notes[id].dates = validDate.join(", ");
+}
+ // Dates From Content
+function browsingError(newNoteItems) {
   for (let newNoteItem of newNoteItems) {
     newNoteItem.classList.remove("trigger");
     newNoteItem.addEventListener("change", () => {
@@ -189,8 +202,8 @@ const browsingError = (newNoteItems) => {
       return true;
     }
   }
-};
-
+}
+ // Browsing Error
 // Max Length
 function maxLengthFunc(maxLength) {
   // Data - Set Max Length
@@ -224,13 +237,13 @@ function maxLengthFunc(maxLength) {
     }
   });
 }
-
-const toggleActive = () => {
+ // Max Length Text Notes
+function toggleActive() {
   createNoteFormOpen.classList.toggle("active");
   createNoteForm.classList.toggle("active");
-};
-const toggleCreateForm = (toggleCreateNote) => {
+}
+function toggleCreateForm(toggleCreateNote) {
   toggleCreateNote.forEach((toggleNote) => toggleNote.addEventListener("click", () => toggleActive()));
-};
+}
 toggleCreateForm([createNoteFormOpen, createNoteFormClose]);
-
+ // Toggle Create Form

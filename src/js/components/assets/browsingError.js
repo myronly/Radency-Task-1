@@ -1,4 +1,4 @@
-const browsingError = (newNoteItems) => {
+function browsingError(newNoteItems) {
   for (let newNoteItem of newNoteItems) {
     newNoteItem.classList.remove("trigger");
     newNoteItem.addEventListener("change", () => {
@@ -9,4 +9,4 @@ const browsingError = (newNoteItems) => {
       return true;
     }
   }
-};
+}
