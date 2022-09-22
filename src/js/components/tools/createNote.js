@@ -8,9 +8,7 @@ createNote.addEventListener("click", (e) => {
   const newName = document.querySelector("#newName");
   const newCategory = document.querySelector("#newCategory");
   const newContent = document.querySelector("#newContent");
-  const newDates = document.querySelector("#newDates");
 
-  // Browsing Error
   try {
     if (browsingError([newName, newCategory, newContent])) return;
     const newNote = {
@@ -18,7 +16,7 @@ createNote.addEventListener("click", (e) => {
       created: moment().format("ll"),
       category: newCategory.value,
       content: newContent.value.trim(),
-      dates: newDates.value,
+      dates: "",
     };
 
     createNoteForm.reset();

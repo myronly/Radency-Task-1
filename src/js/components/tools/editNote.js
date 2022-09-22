@@ -1,4 +1,3 @@
-// Edit Note
 function editNoteRender(getNoteId) {
   const toggleEditSaveNote = (toggleEdit) => {
     toggleEdit.forEach((item) => item.classList.toggle("active"));
@@ -21,7 +20,6 @@ function editNoteRender(getNoteId) {
       editContent.innerHTML = `<input value="${notes[id].content}" type="text" placeholder="Content" required />`;
     });
 
-    // Save Note
     editNoteSave.addEventListener("click", () => {
       const editNameValue = noteId.querySelector(`.noteName input`);
       const editCategoryValue = noteId.querySelector(`.noteCategory select`);
