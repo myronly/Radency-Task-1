@@ -1,4 +1,3 @@
-// Delete Note
 function deleteNoteRender(getNoteId) {
   getNoteId.forEach((noteId) => {
     const id = noteId.dataset.note;
